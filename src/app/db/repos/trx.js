@@ -24,6 +24,20 @@ class TrxRepository {
           FROM public."trx" WHERE id = $1`, id);
   }
 
+  async getTrxByAccount(account) {
+    return this.db.manyOrNone(`SELECT
+            id,
+            "user",
+            trx_typ,
+            ori_acc,
+            des_acc,
+            amount,
+            trx_date
+          FROM public.trx
+          WHERE trx.des_acc = $1
+          OR trx.ori_acc = $1`, account)
+  }
+
   async insTrx(user, trx_typ, ori_acc, des_acc, amount, trx_date) {
     return this.db.oneOrNone(`INSERT INTO public."trx"(
       "user", trx_typ, ori_acc, des_acc, amount, trx_date)

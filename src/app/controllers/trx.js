@@ -20,6 +20,16 @@ const insTrx = async (req, res) => {
   }
 };
 
+const getTrxByAccount = async (req, res) => {
+  try {
+    const trx = await db.trx.getTrxByAccount(req.params.account);
+    res.status(200).send(trx);
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
+};
+
 module.exports = {
-  insTrx
+  insTrx,
+  getTrxByAccount
 };

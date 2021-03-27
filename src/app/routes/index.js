@@ -17,5 +17,6 @@ api.post('/private/trx', auth.verify, auth.general('trx'), trxCtrl.insTrx)
 
 api.get('/private/account/:id', auth.verify, auth.general('account'), accountCtrl.getAccount)
 api.get('/private/users', auth.verify, auth.general('users'), userCtrl.getUsers)
+api.get('/private/trx/:account', auth.verify, auth.general('trx'), trxCtrl.getTrxByAccount)
 
 module.exports = api;
