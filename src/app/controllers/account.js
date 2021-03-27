@@ -10,7 +10,7 @@ const insAccount = async (req, res) => {
     const { user } = serAuth.decodeToken(req.headers.authorization);
     const data = await db.account.getAccount(user.id);
     if (data.length >= 1) {
-      res.status(500).send({ message: 'usuario ya tiene una cuenta asignada' });
+      res.status(500).send({ message: 'Usuario ya tiene una cuenta asignada' });
     } else {
       const account = await db.account.insAccount(number, user.id);
       res.status(200).send(account);
