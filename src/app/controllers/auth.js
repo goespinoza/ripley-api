@@ -1,7 +1,6 @@
 const serAuth = require('../services/auth');
 const ObjConect = require('../db');
 const { db } = ObjConect;
-const { one } = ObjConect.pgp.queryResult;
 
 const register = async (req, res) => {
   try {
@@ -15,22 +14,18 @@ const register = async (req, res) => {
       );
       res.status(200).send(user);
     } else {
-      res.status(403).send({ message: 'Entered credential already exists in our records' });
+      res.status(403).send({ message: 'Usuario ya existe en nuestros registros' });
     }
   } catch (error) {
-    res.status(500).send({ message: error });
+    res.status(500).send({ message: 'Servidor no disponible. Favor intenta más tarde' });
   }
 };
 
 const login = async (req, res) => {
   try {
-    /* let password;
-    password = await serAuth.decryptExt(req.body.password);
-    password = serAuth.encryptInt(password); */
-
     const user = await db.user.login(req.body.rut, req.body.password);
     if (!user) {
-      res.status(200).send({ code: 500, message: 'Incorrect username y/o password' })
+      res.status(403).send({ message: 'Usuario y/o Contraseña incorrecto' })
     }
     if (user) {
       const token = serAuth.createToken(user);
@@ -38,7 +33,7 @@ const login = async (req, res) => {
       res.status(200).send(user);
     }
   } catch (error) {
-    res.status(500).send({ message: error });
+    res.status(500).send({ message: 'Servidor no disponible. Favor intenta más tarde' });
   }
 };
 

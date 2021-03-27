@@ -18,8 +18,6 @@ const corsOption = {
 app.set(dotenv.config());
 
 app.use(cors(corsOption));
-/* app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api', api);

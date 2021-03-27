@@ -2,8 +2,6 @@ const moment = require('moment');
 const serAuth = require('../services/auth');
 const ObjConect = require('../db');
 const { db } = ObjConect;
-const { one } = ObjConect.pgp.queryResult;
-const random = require('random')
 
 const insTrx = async (req, res) => {
   try {
